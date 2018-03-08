@@ -1,6 +1,6 @@
 import rp from 'request-promise-native';
 
-const base_url = 'http://localhost:3000'//'https://sandpiper-api-staging.herokuapp.com'
+const base_url = 'https://sandpiper-api-staging.herokuapp.com';
 
 function registerUser(data) {
   return rp.post({
@@ -11,5 +11,14 @@ function registerUser(data) {
   });
 }
 
+function loginUser(data) {
+  return rp.post({
+    url: `${base_url}/login`,
+    body: data,
+    simple: false,
+    json: true
+  });
+}
 
-export { registerUser };
+
+export { registerUser, loginUser };

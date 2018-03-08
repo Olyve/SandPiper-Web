@@ -1,20 +1,5 @@
 .App {
   text-align: center;
-}
-
-.App-header {
-  background-color: #222;
-  height: 100px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-  text-align: center;
-}
-
-.container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 60px repeat(3, 200px);

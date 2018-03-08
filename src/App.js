@@ -3,7 +3,7 @@ import { NavLink, Route } from 'react-router-dom';
 
 import './App.css';
 import Auth from './components/Auth';
-import { registerUser } from './networking';
+import { registerUser, loginUser } from './networking';
 
 class App extends Component {
   constructor() {
@@ -15,12 +15,21 @@ class App extends Component {
     };
 
     this.handleSignup = this.handleSignup.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
   handleSignup(data) {
     registerUser(data)
       .then((json) => {
         let message = json['messages'].reduce((acc, current) => acc + '\n' + current);
+        alert(message);
+      });
+  }
+
+  handleLogin(data) {
+    loginUser(data)
+      .then((json) => {
+        let message = json['messages'].reduce((acc, current) => acc + 'n' + current);
         alert(message);
       });
   }
@@ -45,7 +54,9 @@ class App extends Component {
         </div>
         
         <div className='grid-c'>
-          <Route exact path='/login' render={() => <Auth handleSignup={this.handleSignup}/>}/>
+          <Route exact path='/login' render={() => 
+            <Auth handleSignup={this.handleSignup} handleLogin={this.handleLogin} />
+          } />
         </div>
       </div>
     );

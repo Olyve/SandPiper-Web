@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './Signup.css';
+import './Login.css';
 
-class Signup extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -25,7 +25,7 @@ class Signup extends Component {
   }
 
   handleSubmit(event) {
-    this.props.handleSignup({ ...this.state });
+    this.props.handleLogin({ ...this.state });
     this.setState({
       email: '',
       password: ''
@@ -36,15 +36,15 @@ class Signup extends Component {
 
   render() {
     return (
-      <div className='signup'>
-        <h2>Register New User</h2>
+      <div className='login'>
+        <h2>Login</h2>
         <form>
           <label>Email: 
           <input type='text' name='email' value={this.state.email} onChange={this.onChange} />
           </label>
           <br />
           <label>Password: 
-          <input type='password' name='password' value={this.state.password} onChange={this.onChange}/>
+          <input type='password' name='password' value={this.state.password} onChange={this.onChange} />
           </label>
           <br />
           <button className='submit' onClick={this.handleSubmit}>Submit</button>
@@ -54,4 +54,4 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+export default Login;
