@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import rp from 'request-promise-native';
-import {NavLink} from 'react-router-dom';
+import { NavLink, Route } from 'react-router-dom';
 
 import './App.css';
 import Auth from './components/Auth';
+import { registerUser } from './networking';
 
 class App extends Component {
   constructor() {
@@ -11,37 +11,42 @@ class App extends Component {
 
     this.state = {
       user_id: '',
-      token: '',
-      base_url: 'http://localhost:3000'//'https://sandpiper-api-staging.herokuapp.com'
+      token: ''
     };
 
     this.handleSignup = this.handleSignup.bind(this);
   }
 
   handleSignup(data) {
-    rp.post({
-      url: `${this.state.base_url}/register`,
-      body: data,
-      simple: false,
-      json: true // automatically parses json response string
-    }).then((json) => {
-      console.log(json);
-    });
+    registerUser(data)
+      .then((json) => {
+        let message = json['messages'].reduce((acc, current) => acc + '\n' + current);
+        alert(message);
+      });
   }
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
+      <div className='App container'>
+        <div className='grid-n'>
           <ul>
-            <NavLink exact to='/' activeStyle={{fontWeight: 'bold'}} className='nav'>
+            <NavLink exact to='/' activeStyle={{fontWeight: 'bold'}} className='nav-item'>
               Home
             </NavLink>
           </ul>
-          <h1 className="App-title">Welcome to SandPiper</h1>
-        </header>
+        </div>
+
+        <div className='grid-l'>
+          <ul>
+            <NavLink exact to='/login' activeStyle={{fontWeight: 'bold'}} className='nav-item'>
+              Login
+            </NavLink>
+          </ul>
+        </div>
         
-        <Auth handleSignup={this.handleSignup}/>
+        <div className='grid-c'>
+          <Route exact path='/login' render={() => <Auth handleSignup={this.handleSignup}/>}/>
+        </div>
       </div>
     );
   }

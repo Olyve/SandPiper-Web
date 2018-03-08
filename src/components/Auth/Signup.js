@@ -26,14 +26,13 @@ class Signup extends Component {
 
   handleSubmit(event) {
     this.props.handleSignup({ ...this.state });
-    alert('handleSubmit');
 
     event.preventDefault();
   }
 
   render() {
     return (
-      <div className='container'>
+      <div className='signup'>
         <form>
           <label>Email: 
           <input type='text' name='email' onChange={this.onChange}/>

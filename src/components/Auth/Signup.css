@@ -1,9 +1,13 @@
-.container {
+.signup {
   margin: 10px;
 }
 
 .submit {
   display: inline-block;
+}
+
+form {
+  vertical-align: center;
 }
 
 label input {
