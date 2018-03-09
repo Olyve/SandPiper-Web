@@ -1,1 +1,1 @@
-web: bin/build
+web: serve -s build
