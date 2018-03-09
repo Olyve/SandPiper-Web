@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Auth should render correctly 1`] = `
+<div
+  className="auth"
+>
+  <div
+    className="login"
+  >
+    <h2>
+      Login
+    </h2>
+    <form>
+      <label>
+        Email:
+        <input
+          name="email"
+          onChange={[Function]}
+          type="text"
+          value=""
+        />
+      </label>
+      <br />
+      <label>
+        Password:
+        <input
+          name="password"
+          onChange={[Function]}
+          type="password"
+          value=""
+        />
+      </label>
+      <br />
+      <button
+        className="submit"
+        onClick={[Function]}
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+  <div
+    className="signup"
+  >
+    <h2>
+      Register New User
+    </h2>
+    <form>
+      <label>
+        Email:
+        <input
+          name="email"
+          onChange={[Function]}
+          type="text"
+          value=""
+        />
+      </label>
+      <br />
+      <label>
+        Password:
+        <input
+          name="password"
+          onChange={[Function]}
+          type="password"
+          value=""
+        />
+      </label>
+      <br />
+      <button
+        className="submit"
+        onClick={[Function]}
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</div>
+`;

@@ -1,9 +1,13 @@
 module.exports = {
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "jest": true
     },
-    "extends": "eslint:recommended",
+    "extends": [ 
+        "eslint:recommended",
+        "react-app"
+    ,
     "parserOptions": {
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
