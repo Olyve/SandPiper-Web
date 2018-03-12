@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Signup should render correctly 1`] = `
+exports[`Signup should render without crashing 1`] = `
 <div
   className="signup"
 >

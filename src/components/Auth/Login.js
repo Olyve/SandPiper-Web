@@ -25,7 +25,10 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
-    this.props.handleLogin({ ...this.state });
+    this.props.handleLogin({
+      email: this.state.email,
+      password: this.state.password
+    });
     this.setState({
       email: '',
       password: ''

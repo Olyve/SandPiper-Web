@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login should render correctly 1`] = `
+exports[`Login should render without crashing 1`] = `
 <div
   className="login"
 >
