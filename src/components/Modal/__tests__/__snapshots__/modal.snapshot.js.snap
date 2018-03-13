@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal should hide message when showMessage is false 1`] = `
+<div
+  className="modal"
+>
+  <div
+    className="modal-popup"
+  >
+    <div>
+      <h3
+        className="modal-title"
+      />
+    </div>
+    <div>
+      <p
+        className="modal-message hidden"
+      />
+    </div>
+    <div
+      className="modal-buttons"
+    >
+      <button
+        className="modal-confirm"
+      >
+        Okay
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Modal should render without crashing 1`] = `
+<div
+  className="modal"
+>
+  <div
+    className="modal-popup"
+  >
+    <div>
+      <h3
+        className="modal-title"
+      />
+    </div>
+    <div>
+      <p
+        className="modal-message"
+      />
+    </div>
+    <div
+      className="modal-buttons"
+    >
+      <button
+        className="modal-confirm"
+      >
+        Okay
+      </button>
+    </div>
+  </div>
+</div>
+`;
