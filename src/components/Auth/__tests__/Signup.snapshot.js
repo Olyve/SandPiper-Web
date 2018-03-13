@@ -1,13 +1,12 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import Signup from '../Signup';
 
 describe('Signup', () => {
-  it('should render correctly', () => {
-    const rendered = renderer.create(
+  it('should render without crashing', () => {
+    const wrapper = shallow(
       <Signup />
     );
 
-    expect(rendered.toJSON()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });

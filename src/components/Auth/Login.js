@@ -25,7 +25,10 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
-    this.props.handleLogin({ ...this.state });
+    this.props.handleLogin({
+      email: this.state.email,
+      password: this.state.password
+    });
     this.setState({
       email: '',
       password: ''
@@ -39,15 +42,21 @@ class Login extends Component {
       <div className='login'>
         <h2>Login</h2>
         <form>
-          <label>Email: 
-          <input type='text' name='email' value={this.state.email} onChange={this.onChange} />
-          </label>
-          <br />
-          <label>Password: 
-          <input type='password' name='password' value={this.state.password} onChange={this.onChange} />
-          </label>
-          <br />
-          <button className='submit' onClick={this.handleSubmit}>Submit</button>
+          <div className='inputs'>
+            <div>
+              <label className='inputs-label'><span>Email: </span>
+                <input type='text' name='email' value={this.state.email} onChange={this.onChange} />
+              </label>
+            </div>
+            <div>
+              <label className='inputs-label'><span>Password: </span>
+                <input type='password' name='password' value={this.state.password} onChange={this.onChange} />
+              </label>
+            </div>
+            <div className='inputs-submit'>
+              <button className='submit' onClick={this.handleSubmit}>Submit</button>
+            </div>
+          </div>
         </form>
       </div>
     );

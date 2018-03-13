@@ -1,4 +1,10 @@
+* {
+  box-sizing: border-box;
+}
+
 .login {
+  display: flex;
+  flex-direction: column;
   margin: 10px;
   background-color: #ccc;
   border-radius: 10px;
@@ -6,24 +12,62 @@
   height: 175px;
 }
 
-.submit {
-  display: inline-block;
-  margin-bottom: 15px;
+.inputs {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
 }
 
-h2 {
+.inputs div {
+  flex: 1;
+  height: 40px;
+  padding: 0 15px;
+  align-items: center;
+  display: flex;
+}
+
+.inputs-label {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.inputs-label span {
+  width: 100px;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.inputs-label input {
+  width: 150px;
+  padding: .25em .5em;
+}
+
+.inputs-submit {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.inputs-submit button {
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: #2ecc34;
+  color: #fff;
+  font-size: 14px;
+}
+
+.inputs-submit button:active {
+  background-color: #26a529;
+}
+
+.inputs-submit button:focus {
+  outline: none;
+}
+
+.inputs h2 {
+  flex: 1;
   color: #222;
-}
-
-form {
-  vertical-align: center;
-}
-
-label {
-  margin: 15px;
-}
-
-label input {
-  margin-bottom: 10px;
-  margin-left: 10px;
+  margin: 15px 0 10px 0;
 }

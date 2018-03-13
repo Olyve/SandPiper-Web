@@ -1,13 +1,12 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import Login from '../Login';
 
 describe('Login', () => {
-  it('should render correctly', () => {
-    const rendered = renderer.create(
+  it('should render without crashing', () => {
+    const wrapper = shallow(
       <Login />
     );
 
-    expect(rendered.toJSON()).toMatchSnapshot();
+    expect(wrapper).toMatchSnapshot();
   });
 });
