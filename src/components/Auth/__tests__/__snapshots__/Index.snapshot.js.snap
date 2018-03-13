@@ -5,11 +5,15 @@ exports[`Auth should render Login by default 1`] = `
   className="auth"
 >
   <Login />
-  <button
-    onClick={[Function]}
-  >
-    Toggle Display
-  </button>
+  <h4>
+    If you don't have an account 
+    <a
+      onClick={[Function]}
+    >
+      click here
+    </a>
+     to register.
+  </h4>
 </div>
 `;
 
@@ -18,10 +22,14 @@ exports[`Auth should render Register when showLogin is false 1`] = `
   className="auth"
 >
   <Signup />
-  <button
-    onClick={[Function]}
-  >
-    Toggle Display
-  </button>
+  <h4>
+    If you already have an account 
+    <a
+      onClick={[Function]}
+    >
+      click here
+    </a>
+     to log in.
+  </h4>
 </div>
 `;

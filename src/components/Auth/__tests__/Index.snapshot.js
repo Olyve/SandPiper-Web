@@ -16,7 +16,7 @@ describe('Auth', () => {
     );
 
     // Find and trigger the button to toggle state
-    let submit = wrapper.find('button');
+    let submit = wrapper.find('a');
     submit.simulate('click', { preventDefault: () => {} });
 
     expect(wrapper).toMatchSnapshot();

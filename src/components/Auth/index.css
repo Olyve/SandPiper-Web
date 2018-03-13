@@ -1,6 +1,17 @@
 .auth {
   display: flex;
+  flex-direction: column;
   height: 100%;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+}
+
+h4 a {
+  color: blue;
+  text-decoration: underline;
+}
+
+h4 a:hover {
+  background-color: #bbb;
+  color: white;
 }

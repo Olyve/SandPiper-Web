@@ -1,4 +1,6 @@
 .signup {
+  display: flex;
+  flex-direction: column;
   margin: 10px;
   background-color: #ccc;
   border-radius: 10px;
@@ -6,24 +8,18 @@
   height: 175px;
 }
 
-.submit {
-  display: inline-block;
-  margin-bottom: 15px;
+form {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+}
+
+form div {
+  flex: 1;
+  height: 20px;
 }
 
 h2 {
+  flex: 1;
   color: #222;
-}
-
-form {
-  vertical-align: center;
-}
-
-label {
-  margin: 15px;
-}
-
-label input {
-  margin-bottom: 10px;
-  margin-left: 10px;
 }
