@@ -1,92 +1,56 @@
 import React, { Component } from 'react';
 import { NavLink, Route, BrowserRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import './App.css';
 import Auth from './components/Auth';
 import Modal from './components/Modal/Modal';
-import { registerUser, loginUser } from './networking';
+import { registerUser, loginUser } from './Utilities/networking';
+import * as Actions from './Utilities/actions';
 
-class App extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      user_id: '',
-      token: '',
-      displayModal: {
-        isVisible: false,
-        title: 'title',
-        showMessage: true,
-        message: 'message'
-      }
-    };
-  }
+export class App extends Component {
 
   handleSignup(data) {
     // Show modal
-    this.showLoadingModal();
+    this.props.showLoadingModal();
 
     registerUser(data)
       .then((json) => {
-        this.setState({
-          displayModal: {
-            isVisible: true,
-            title: json['status'],
-            showMessage: true,
-            message: json['messages'].reduce((acc, current) => acc + '\n' + current)
-          }
-        });
+        let message = json['messages'].reduce((acc, current) => acc + '\n' + current);
+        this.props.showModal(json['status'], message);
       });
   }
 
   handleLogin(data) {
     // Show Modal
-    this.showLoadingModal();
+    this.props.showLoadingModal();
     
     // Kick off request to API
     loginUser(data)
       .then((json) => {
-        this.setState({
-          displayModal: {
-            isVisible: true,
-            title: json['status'],
-            showMessage: true,
-            message: json['messages'].reduce((acc, current) => acc + '\n' + current)
-          }
-        });
+        let message = json['messages'].reduce((acc, current) => acc + '\n' + current);
+        this.props.showModal(json['status'], message);
+
+        // If login was successful add token and user_id to state 
+        if (json['status'] === 'Success') {
+          this.props.updateUser({
+            token: json['data']['token'],
+            user_id: json['data']['user_id']
+          });
+        }
       });
   }
 
   handleConfirm() {
     // Hide the modal
-    this.resetModalAndHide();
+    this.props.resetModal();
   }
 
   showModal() {
-    if (this.state.displayModal.isVisible) {
-      return <Modal handleConfirm={() => this.handleConfirm()} options={this.state.displayModal}/>
+    if (this.props.displayModal) {
+      return <Modal handleConfirm={() => this.handleConfirm()} />
     }
-  }
-
-  // Used to show the loading popup
-  showLoadingModal() {
-    this.setState({
-      displayModal: {
-        isVisible: true,
-        title: 'Loading...',
-        showMessage: false
-      }
-    });
-  }
-
-  resetModalAndHide() {
-    this.setState({
-      displayModal: {
-        isVisible: false,
-        title: '',
-        message: ''
-      }
-    });
   }
 
   render() {
@@ -124,4 +88,15 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return { 
+    user: state.user,
+    displayModal: state.modal.isVisible 
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(Actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

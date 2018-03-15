@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
-import Modal from '../Modal';
+import { Modal } from '../Modal';
 
 describe('Modal Component', () => {
   const handleConfirm = sinon.spy();

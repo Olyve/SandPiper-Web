@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from '../Modal';
+import { Modal } from '../Modal';
 
 describe('Modal', () => {
   it('should render without crashing', () => {
@@ -7,9 +7,10 @@ describe('Modal', () => {
       isVisible: true,
       title: '',
       showMessage: true,
-      message: ''
+      message: '',
+      showButtons: true
     };
-    const wrapper = shallow(<Modal options={options} />);
+    const wrapper = shallow(<Modal {...options} />);
 
     expect(wrapper).toMatchSnapshot();
   });
@@ -19,9 +20,23 @@ describe('Modal', () => {
       isVisible: true,
       title: '',
       showMessage: false,
-      message: ''
+      message: '',
+      showButtons: true
     };
-    const wrapper = shallow(<Modal options={options} />);
+    const wrapper = shallow(<Modal {...options} />);
+
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should hide buttons when showButtons is false', () => {
+    let options = {
+      isVisible: true,
+      title: '',
+      showMessage: true,
+      message: '',
+      showButtons: false
+    };
+    const wrapper = shallow(<Modal {...options} />);
 
     expect(wrapper).toMatchSnapshot();
   });

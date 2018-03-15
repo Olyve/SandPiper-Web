@@ -6,8 +6,10 @@
     "classnames": "^2.2.5",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
+    "redux": "^3.7.2",
     "request": "^2.83.0",
     "request-promise-native": "^1.0.5",
     "serve": "^6.5.2"
@@ -28,6 +30,8 @@
     "sinon": "^4.4.2"
   },
   "jest": {
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   }
 }

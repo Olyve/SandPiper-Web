@@ -1,26 +1,32 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import cx from 'classnames';
 import './Modal.css';
 
-class Modal extends Component {
+export class Modal extends Component {
   render() {
     const messageClasses = cx({
       'modal-message': true,
-      'hidden': !this.props.options.showMessage
+      'hidden': !this.props.showMessage
+    });
+
+    const buttonClasses = cx({
+      'modal-buttons': true,
+      'hidden': !this.props.showButtons
     });
 
     return (
       <div className='modal'>
         <div className='modal-popup'>
           <div>
-            <h3 className='modal-title'>{this.props.options.title}</h3>
+            <h3 className='modal-title'>{this.props.title}</h3>
           </div>
           <div>
             <p className={messageClasses}>
-              {this.props.options.message}
+              {this.props.message}
             </p>
           </div>
-          <div className='modal-buttons'>
+          <div className={buttonClasses}>
             <button className='modal-confirm' onClick={this.props.handleConfirm}>
               Okay
             </button>
@@ -31,4 +37,8 @@ class Modal extends Component {
   }
 }
 
-export default Modal;
+function mapStateToProps(state) {
+  return { ...state }
+}
+
+export default connect(mapStateToProps)(Modal);
