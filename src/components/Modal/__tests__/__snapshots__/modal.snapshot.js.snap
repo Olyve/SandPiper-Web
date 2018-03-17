@@ -21,6 +21,7 @@ exports[`Modal should hide buttons when showButtons is false 1`] = `
       className="modal-buttons hidden"
     >
       <button
+        autoFocus={true}
         className="modal-confirm"
       >
         Okay
@@ -51,6 +52,7 @@ exports[`Modal should hide message when showMessage is false 1`] = `
       className="modal-buttons"
     >
       <button
+        autoFocus={true}
         className="modal-confirm"
       >
         Okay
@@ -81,6 +83,7 @@ exports[`Modal should render without crashing 1`] = `
       className="modal-buttons"
     >
       <button
+        autoFocus={true}
         className="modal-confirm"
       >
         Okay

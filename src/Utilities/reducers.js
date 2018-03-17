@@ -49,8 +49,8 @@ function modal(state = initialState.modal, action) {
       return {
         ...state,
         isVisible: true,
-        title: action.title,
-        message: action.message
+        title: action.payload.title,
+        message: action.payload.message
       };
     case RESET_MODAL:
       return { ...initialState.modal };

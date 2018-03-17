@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink, Route, BrowserRouter } from 'react-router-dom';
+import { NavLink, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -17,8 +17,16 @@ export class App extends Component {
 
     registerUser(data)
       .then((json) => {
-        let message = json['messages'].reduce((acc, current) => acc + '\n' + current);
-        this.props.showModal(json['status'], message);
+        // Reset the modal
+        this.props.resetModal();
+
+        if (json["status"] !== 'Created') {
+          let message = json['messages'].reduce((acc, current) => acc + '\n' + current);
+          this.props.showModal(json['status'], message);
+        }
+        else {
+          return this.handleLogin({email: data.email, password: data.password});
+        }
       });
   }
 
@@ -29,15 +37,24 @@ export class App extends Component {
     // Kick off request to API
     loginUser(data)
       .then((json) => {
-        let message = json['messages'].reduce((acc, current) => acc + '\n' + current);
-        this.props.showModal(json['status'], message);
+        // Reset the modal
+        this.props.resetModal();
 
         // If login was successful add token and user_id to state 
         if (json['status'] === 'Success') {
+          console.log(json['data']);
           this.props.updateUser({
             token: json['data']['token'],
-            user_id: json['data']['user_id']
+            id: json['data']['user_id']
           });
+
+          // Redirect to the home page
+          this.props.history.push('/');
+        }
+        else {
+          // Setup new modal state with message for user
+          let message = json['messages'].reduce((acc, current) => acc + '\n' + current);
+          this.props.showModal(json['status'], message);
         }
       });
   }
@@ -56,34 +73,55 @@ export class App extends Component {
   render() {
     return (
       <div>
-        <BrowserRouter>
-          <div className='App container'>
-            <div className='grid-n'>
-              <ul>
-                <NavLink exact to='/' activeStyle={{fontWeight: 'bold'}} className='nav-item'>
-                  Home
-                </NavLink>
-              </ul>
-            </div>
-
-            <div className='grid-l'>
-              <ul>
-                <NavLink exact to='/login' activeStyle={{fontWeight: 'bold'}} className='nav-item'>
-                  Login
-                </NavLink>
-              </ul>
-            </div>
-            
-            <div className='grid-c'>
-              <Route exact path='/login' render={() => 
-                <Auth handleSignup={(i) => this.handleSignup(i)} handleLogin={(i) => this.handleLogin(i)} />
-              } />
-            </div>
+        <div className='App container'>
+          <div className='grid-n'>
+            <ul>
+              <NavLink exact to='/' activeStyle={{fontWeight: 'bold'}} className='nav-item'>
+                Home
+              </NavLink>
+            </ul>
           </div>
-        </BrowserRouter>
+
+          <div className='grid-l'>
+            <ul>
+              {loginNavLink(this.props.user.id)}
+            </ul>
+          </div>
+          
+          <div className='grid-c'>
+            <Route exact path='/' render={() => {
+              if (this.props.user.id !== '') {
+                return (<h3>{this.props.user.id} is logged in.</h3>);
+              }
+              else {
+                return (<h3>Please log in to view your dashboard.</h3>);
+              }
+            }} />
+            <Route exact path='/login' render={() => 
+              <Auth handleSignup={(i) => this.handleSignup(i)} handleLogin={(i) => this.handleLogin(i)} />
+            } />
+          </div>
+        </div>
         {/* Modal Popup */}
         {this.showModal()}
       </div>
+    );
+  }
+}
+
+function loginNavLink(user_id) {
+  if (user_id !== '') {
+    return (
+      <NavLink exact to='/profile' activeStyle={{fontWeight: 'bold'}} className='nav-item'>
+        Profile
+      </NavLink>
+    );
+  }
+  else {
+    return (
+      <NavLink exact to='/login' activeStyle={{fontWeight: 'bold'}} className='nav-item'>
+        Login
+      </NavLink>
     );
   }
 }
@@ -99,4 +137,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(Actions, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

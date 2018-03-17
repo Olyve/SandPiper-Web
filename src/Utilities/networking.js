@@ -1,6 +1,6 @@
 import rp from 'request-promise-native';
 
-const base_url = 'https://sandpiper-api-staging.herokuapp.com';
+const base_url = 'http://staging-api.sandpiper.ninja';
 
 function registerUser(data) {
   return rp.post({

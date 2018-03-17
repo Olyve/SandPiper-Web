@@ -27,7 +27,7 @@ export class Modal extends Component {
             </p>
           </div>
           <div className={buttonClasses}>
-            <button className='modal-confirm' onClick={this.props.handleConfirm}>
+            <button autoFocus className='modal-confirm' onClick={this.props.handleConfirm}>
               Okay
             </button>
           </div>
@@ -38,7 +38,7 @@ export class Modal extends Component {
 }
 
 function mapStateToProps(state) {
-  return { ...state }
+  return { ...state.modal }
 }
 
 export default connect(mapStateToProps)(Modal);
