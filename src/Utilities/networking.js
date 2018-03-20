@@ -1,6 +1,7 @@
 import rp from 'request-promise-native';
 
-const base_url = 'http://staging-api.sandpiper.ninja';
+// const base_url = 'http://staging-api.sandpiper.ninja';
+const base_url = 'http://localhost:3000';
 
 function registerUser(data) {
   return rp.post({
@@ -20,5 +21,35 @@ function loginUser(data) {
   });
 }
 
+function spotifyAuth(id, token, payload) {
+  return rp.post({
+    uri: `${base_url}/users/${id}/spotifyAuth`,
+    headers: {
+      'Authorization': `Bearer ${token}`
+    },
+    body: {...payload},
+    simple: false,
+    json: true
+  });
+}
 
-export { registerUser, loginUser };
+function searchSpotify(token, search_term) {
+  return rp.get({
+    uri: `${base_url}/search/spotify`,
+    headers: {
+      'Authorization': `Bearer ${token}`
+    },
+    qs: {
+      search_term: search_term
+    },
+    simple: false,
+    json: true
+  });
+}
+
+export { 
+  registerUser,
+  loginUser, 
+  spotifyAuth,
+  searchSpotify 
+};
