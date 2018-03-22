@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { searchSpotify } from '../../Utilities/networking';
+import './Dashboard.css';
+import TrackList from './Track';
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      search: ''
+      search: '',
+      tracks: []
     }
   }
 
@@ -24,10 +27,11 @@ class Dashboard extends Component {
     searchSpotify(this.props.user.token, this.state.search)
       .then((json) => {
         console.log(json);
-      })
-      .catch((err) => {
-        // TODO: Actually handle an error
-        console.log(err);
+
+        const results = json['data']['results'];
+        this.setState({
+          tracks: results['tracks']
+        });
       });
   }
 
@@ -39,6 +43,9 @@ class Dashboard extends Component {
             <input type='text' name='search' value={this.state.search} onChange={(e) => this.onChange(e)} />
           </label>
           <button className='search-submit' onClick={() => this.handleSearch()}>Search</button>
+        </div>
+        <div className='dashboard-searchResults'>
+          <TrackList tracks={this.state.tracks}/>
         </div>
       </div>
     );

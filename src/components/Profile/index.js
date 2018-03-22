@@ -5,9 +5,7 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state) => {
-  return {
-    ...state.user
-  }
+  return { ...state.user }
 }
 
 const mapDispatchToProps = (dispatch) => {

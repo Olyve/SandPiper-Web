@@ -1,7 +1,11 @@
 import rp from 'request-promise-native';
 
-// const base_url = 'http://staging-api.sandpiper.ninja';
-const base_url = 'http://localhost:3000';
+var base_url = ''
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+  base_url = 'http://localhost:3000';
+} else {
+  base_url = 'http://staging-api.sandpiper.ninja';
+}
 
 function registerUser(data) {
   return rp.post({
